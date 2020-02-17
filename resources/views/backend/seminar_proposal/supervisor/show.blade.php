@@ -4,8 +4,9 @@
     {!! cui_breadcrumb([
         'Home' => route('home'),
         'Tugas Akhir' => route('students.index'),
-        // 'Seminar Proposal' => route('students.prosem.student', [$theses->thesis_id]),
-        'Detail' => '#'
+        'Detail Tugas Akhir' => route('admin.supervisor.theses.show', [$theses[0]->theses_id]),
+        'Seminar Proposal' => route('admin.supervisor.prosem.index', [$theses[0]->thesis_id]),
+        'Detail Seminar Proposal' => '#'
     ]) !!}
 @endsection
 

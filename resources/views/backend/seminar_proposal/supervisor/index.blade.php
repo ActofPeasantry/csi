@@ -3,7 +3,9 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('home'),
-        'Tugas Akhir' => '#',
+        'Tugas Akhir' => route('admin.supervisor.index'),
+        'Detail Tugas Akhir' => route('admin.supervisor.theses.show', [$theses[0]->theses_id]),
+        'Seminar Proposal' => '#',
     ]) !!}
 @endsection
 
@@ -51,19 +53,7 @@
                                 <td class="text-center">              
                                     @foreach ($t_statuses as $key => $val)                                           
                                         @if ($key == $thesis->status)
-                                            @if($thesis->status == 0)
-                                                <h4>
-                                                    <span class="badge badge-primary">{{ $val }}</span>
-                                                </h4>
-                                            @elseif($thesis->status == 1)
-                                                <h4>
-                                                    <span class="badge badge-success">{{ $val }}</span>
-                                                </h4>
-                                            @else
-                                                <h4>
-                                                    <span class="badge badge-danger">{{ $val }}</span>
-                                                </h4>
-                                            @endif
+                                            {{$val}}
                                         @endif
                                     @endforeach
                                 </td>

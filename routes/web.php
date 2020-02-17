@@ -27,7 +27,7 @@ Route::post('/postlogin', 'AuthController@postlogin')->name('postlogin');
     Route::post('/supervisor/rejected/{id}', 'ThesisSupervisorController@rejected')->name('admin.supervisor.rejected');
     Route::get('/supervisor/thesis/detail/{id}', 'ThesisController@show')->name('admin.supervisor.theses.show');
       //Detail Thesis dan Sempro
-    Route::get('/mahasiswa/seminar_proposal/{id}', 'SeminarProposalController@supervisor')->name('admin.supervisor.prosem.index');
+    // Route::get('/mahasiswa/seminar_proposal/{id}', 'SeminarProposalController@supervisor')->name('admin.supervisor.prosem.index');
 
     //Tugas Akhir
     Route::get('/mahasiswa', 'ThesisController@index')->name('students.index');

@@ -59,7 +59,7 @@
                                     @endforeach    
                                 </td>                              
                                 <td class="text-center">
-                                    <a href="{{route('students.theses.show', [$supervisor->thesis_id] )}}" class="btn btn-primary">Detail</a>
+                                    <a href="{{route('admin.supervisor.theses.show', [$supervisor->thesis_id] )}}" class="btn btn-primary">Detail</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="row">
@@ -81,7 +81,7 @@
                         </tbody>
                     </table>
 
-                    <div class="row justify-content-end">
+                    {{-- <div class="row justify-content-end">
                         <div class="col-md-6 text-right">
                         </div>
                         <div class="col-md-6 justify-content-end">
@@ -89,7 +89,7 @@
                                 {{ $supervisors->links() }}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     
                 </div><!--card-body-->
             </div><!--card-->

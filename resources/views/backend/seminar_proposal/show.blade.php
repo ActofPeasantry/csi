@@ -2,10 +2,11 @@
 
 @section('breadcrumb')
     {!! cui_breadcrumb([
-        'Home' => route('home'),
+         'Home' => route('home'),
         'Tugas Akhir' => route('students.index'),
-        // 'Seminar Proposal' => route('students.prosem.student', [$theses->thesis_id]),
-        'Detail' => '#'
+        'Detail Tugas Akhir' => route('students.theses.show', [$theses[0]->theses_id]),
+        'Seminar Proposal' => route('students.prosem.index', [$theses[0]->theses_id]),
+        'Detail Seminar Proposal' => '#',
     ]) !!}
 @endsection
 

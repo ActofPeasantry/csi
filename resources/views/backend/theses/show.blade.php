@@ -36,6 +36,7 @@
             </div>
         </div>
 
+        @if ($theses[0]->status != 35 && $theses[0]->status != 0)    
         <div class="justify-content-center col-sm-4">  
             <div class="card">
                 <div class="card-header">
@@ -54,26 +55,27 @@
             </div>
 
             <br>
-
+            
             <div class="card">
-                    <div class="card-header">
-                        <i class="fa fa-book"></i> <strong>Logbook</strong>
-                    </div>
-                    <div class="card-body">
-                            <a class="btn btn-primary" href="{{route('students.ta_logbook.index', [$theses[0]->id])}}">Lihat Logbook</a>
-                    </div>
+                <div class="card-header">
+                    <i class="fa fa-book"></i> <strong>Logbook</strong>
                 </div>
+                <div class="card-body">
+                        <a class="btn btn-primary" href="{{route('students.ta_logbook.index', [$theses[0]->id])}}">Lihat Logbook</a>
+                </div>
+            </div>
 
             <br>
 
             <div class="card">
-                    <div class="card-header">
-                        <i class="fa fa-file"></i> <strong>Seminar Proposal</strong>
-                    </div>
-                    <div class="card-body">
-                        <a href="{{route('students.prosem.index', [$theses[0]->id])}}" class="btn btn-primary">Seminar Proposal</a>
-                    </div>
+                <div class="card-header">
+                    <i class="fa fa-file"></i> <strong>Seminar Proposal</strong>
                 </div>
+                <div class="card-body">
+                    <a href="{{route('students.prosem.index', [$theses[0]->id])}}" class="btn btn-primary">Seminar Proposal</a>
+                </div>
+            </div>
+        @endif
         </div>
 
     </div>

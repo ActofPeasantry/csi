@@ -3,12 +3,14 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('home'),
-        'Tugas Akhir' => '#',
+        'Tugas Akhir' => route('students.index'),
+        'Detail Tugas Akhir' => route('students.theses.show', [$theses[0]->theses_id]),
+        'Seminar Proposal' => '#',
     ]) !!}
 @endsection
 
 @section('toolbar')
-    {{-- {!! cui_toolbar_btn(route('admin.students.create'), 'icon-plus', 'Tambah Mahasiswa') !!} --}}
+    <button class="btn" data-toggle="modal" data-target="#modelId"> <i class='icon-plus'></i>Tambahkan Proposal</button>
 @endsection
 
 @section('content')
@@ -21,18 +23,11 @@
                     <div class="row">
                         <div class="col-6">
                             <strong><i class="fa fa-list "></i> List Seminar Proposal</strong>
+                            <form class="post" action="{{route('students.prosem.store')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @include('backend.seminar_proposal._modal')
+                            </form>
                         </div>
-
-                        <!-- Button trigger modal -->
-                        <div  class="text-right col-6">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
-                                Tambahkan Proposal
-                                </button>
-                        </div>
-                        <form class="post" action="{{route('students.prosem.store')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @include('backend.seminar_proposal._modal')
-                        </form>
                 </div>
 
                 {{-- CARD BODY--}}

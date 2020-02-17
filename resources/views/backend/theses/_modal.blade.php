@@ -1,11 +1,3 @@
-<!-- Button trigger modal -->
-    <div class="text-right col-6">
-        <button type="button" class="btn btn-primary btn-group" data-toggle="modal" data-target="#model_pembimbing">
-        Ajukan pembimbing
-        </button>
-    </div>
-</div>
-
 {!! Form::open(['method' => 'POST', 'route' => ['students.theses.store'], 'class' => 'post']) !!}
 <!-- Modal -->
 <div class="modal fade" id="model_pembimbing" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -23,24 +15,29 @@
                         {!! Form::hidden('student_id', $student->id) !!}
 
                         <div class="form-group">
-                                <label for="title">Theses Title*</label>
+                                <label for="title">Judul Tugas Akhir*</label>
                                     {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => "Title", 'required']) !!}
                         </div>
 
                         <div class="form-group">
-                                <label for="thesis_id">Topic of Theses*</label>
+                                <label for="title">Tanggal Mulai*</label>
+                                    {!! Form::date('start_at', null, ['class' => 'form-control', 'placeholder' => "Title", 'required']) !!}
+                        </div>
+
+                        <div class="form-group">
+                                <label for="thesis_id">Topik Tugas Akhir*</label>
                                     {!! Form::select('thesis_id', $topic, null, ['class' => 'form-control', 'placeholder' => "Topic", 'required']) !!}
                         </div>
 
                         <div class="form-group">
-                            <label for="abstract">Theses Abstract*</label>
+                            <label for="abstract"> Abstraksi Tugas Akhir*</label>
                                 {!! Form::textArea('abstract', null, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="row">
                         <div class="container col-sm mb-4">
                             <div class="form-group">
-                                    <label for="lecturer_id">Name of Supervisor*</label>
+                                    <label for="lecturer_id">Dosen Penguji*</label>
                                         {!! Form::select('lecturer_id[]', $lecturer, null, ['class' => 'form-control mb-1', 'placeholder' => "Supervisor's name", 'required']) !!}
                                         {!! Form::hidden('position[]', 1) !!}        
                             </div>
@@ -48,7 +45,7 @@
 
                         <div class="container col-sm">
                             <div class="form-group">
-                                    <label for="lecturer_id">Name of Supervisor's Assistant</label>
+                                    <label for="lecturer_id">Asisten Dosen Penguji</label>
                                         {!! Form::select('lecturer_id[]', $lecturer, null, ['class' => 'form-control mb-1', 'placeholder' => "Supervisor's name", 'nullable']) !!}
                                         {!! Form::hidden('position[]', 1) !!}            
                             </div>
@@ -56,7 +53,7 @@
 
                         <div class="container col-sm">
                             <div class="form-group">
-                                    <label for="lecturer_id">Name of Supervisor's Assistant</label>
+                                    <label for="lecturer_id">Asisten Dosen Penguji</label>
                                         {!! Form::select('lecturer_id[]', $lecturer, null, ['class' => 'form-control mb-1', 'placeholder' => "Supervisor's name", 'nullable']) !!}
                                         {!! Form::hidden('position[]', 1) !!}            
                             </div>

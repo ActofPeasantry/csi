@@ -25,14 +25,14 @@ class ThesisSupervisorController extends Controller
         ->join('students', 'students.id', '=', 'theses.student_id')
         ->where('thesis_supervisors.status',  0)
         ->where('lecturer_id',  $user)
-        ->paginate(10);
+        ->get();
 
         $accepts = ThesisSupervisor::select('thesis_supervisors.*', 'students.name as student_name', 'students.nim as student_nim', 'theses.title as title', 'theses.status as thesis_status', 'theses.id as thesis_id')
         ->join('theses', 'theses.id', '=', 'thesis_supervisors.thesis_id')
         ->join('students', 'students.id', '=', 'theses.student_id')
         ->where('thesis_supervisors.status',  1)
         ->where('lecturer_id',  $user)
-        ->paginate(10);
+        ->paginate(5);
 
         return view('backend.supervisor.index', compact('supervisors', 'accepts', 't_statuses'));
     } // INDEXEND

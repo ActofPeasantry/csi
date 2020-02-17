@@ -14,7 +14,7 @@ class SeminarProposalController extends Controller
     public function student($id){
         $t_statuses =  ThesisProposal::$proposalStatuses;
 
-        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title')
+        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title', 'theses.id as theses_id')
         ->join('theses', 'theses.id', '=', 'thesis_proposals.thesis_id')
         ->where('thesis_proposals.thesis_id', $id)
         ->paginate(10);
@@ -50,7 +50,7 @@ class SeminarProposalController extends Controller
     public function show_student($id){
         $t_statuses =  ThesisProposal::$proposalStatuses;
 
-        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title')
+        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title', 'theses.id as theses_id')
         ->join('theses', 'theses.id', '=', 'thesis_proposals.thesis_id')
         ->where('thesis_proposals.id', $id)
         ->get();
@@ -62,7 +62,7 @@ class SeminarProposalController extends Controller
     public function supervisor($id){
         $t_statuses =  ThesisProposal::$proposalStatuses;
 
-        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title')
+        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title', 'theses.id as theses_id')
         ->join('theses', 'theses.id', '=', 'thesis_proposals.thesis_id')
         ->where('thesis_proposals.thesis_id', $id)
         ->paginate(10);
@@ -83,7 +83,7 @@ class SeminarProposalController extends Controller
     public function show_supervisor($id){
         $t_statuses =  ThesisProposal::$proposalStatuses;
 
-        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title')
+        $theses =  ThesisProposal::select('thesis_proposals.*', 'thesis_proposals.status as status', 'thesis_proposals.id as id', 'theses.title', 'theses.id as theses_id')
         ->join('theses', 'theses.id', '=', 'thesis_proposals.thesis_id')
         ->where('thesis_proposals.id', $id)
         ->get();
@@ -101,23 +101,23 @@ class SeminarProposalController extends Controller
         return redirect('/supervisor/seminar_proposal/detail/'.$id);
     }
 
-    function rejected($id){
-        dd('working_rejected');
-        // $user_id = auth()->user();
-        // $user = Lecturer::find($user_id)->pluck('id');
+    // function rejected($id){
+    //     dd('working_rejected');
+    //     // $user_id = auth()->user();
+    //     // $user = Lecturer::find($user_id)->pluck('id');
 
-        // $theses = Theses::find($id)->update([
-        //     "status" => 35,
-        // ]);
+    //     // $theses = Theses::find($id)->update([
+    //     //     "status" => 35,
+    //     // ]);
 
-        // $supervisor = ThesisSupervisor::where([
-        //     ['thesis_id', '=', $id],
-        //     ['lecturer_id', '=', $user],
-        // ])->update(["status" => 2]);
+    //     // $supervisor = ThesisSupervisor::where([
+    //     //     ['thesis_id', '=', $id],
+    //     //     ['lecturer_id', '=', $user],
+    //     // ])->update(["status" => 2]);
         
-        toastr()->error('Tugas Akhir sudah ditolak');
-        // return redirect()->route('admin.supervisor.index');
-    }
+    //     toastr()->error('Tugas Akhir sudah ditolak');
+    //     // return redirect()->route('admin.supervisor.index');
+    // }
 
     public function download($id){
         try {

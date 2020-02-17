@@ -23,14 +23,25 @@ class ThesisController extends Controller
         $topic = DB::table('thesis_topics')->pluck('name', 'id');
             
             $theses =  Theses::select('theses.*', 'thesis_topics.name as topics_name')
+            // ->join('thesis_supervisors', 'theses.id', '=', 'thesis_supervisors.thesis_id')
+            // ->join('lecturers', 'lecturers.id', '=', 'thesis_supervisors.lecturer_id')
             ->join('thesis_topics', 'theses.thesis_id', '=', 'thesis_topics.id')
             ->where([
-                ['theses.student_id', $user],
-                // ['theses.status', '>=', 4],
-                ['theses.status', '<', 35]
-                ])->paginate(10);
-            // ->where(['theses.status', '>=', 4])
-            // ->where('theses.status', '<', 35)
+                    ['theses.student_id', $user],
+                    ['theses.status', '>', 4],
+                    ['theses.status', '<', 35]
+                ])->get();
+
+                $theses2 =  Theses::select('theses.*', 'thesis_topics.name as topics_name')
+                ->join('thesis_topics', 'theses.thesis_id', '=', 'thesis_topics.id')
+                ->where([
+                        ['theses.student_id', $user],
+                        ['theses.status', '=', 0],
+                    ])
+                ->orWhere([['theses.status', '=', 35]
+                    ])
+                ->paginate(5);
+                    // dd($theses2);
             
             $supervisors = ThesisSupervisor::select('thesis_supervisors.*', 'lecturers.name as lecturer_name')
             ->join('lecturers', 'thesis_supervisors.lecturer_id', '=', 'lecturers.id')
@@ -38,7 +49,7 @@ class ThesisController extends Controller
             ->get();
 
             $lecturer = DB::table('lecturers')->pluck('name', 'id');
-            return view('backend.theses.index', compact('theses', 'supervisors', 't_statuses', 'lecturer', 'topic', 'student'));
+            return view('backend.theses.index', compact('theses', 'supervisors', 't_statuses', 'lecturer', 'topic', 'student', 'theses2'));
     }
     
 
@@ -54,11 +65,13 @@ class ThesisController extends Controller
         $status = [];
             foreach ($lecturer_field as $value) {
                 $status[$value] = 0;
+
                 foreach($supervisors as $supervisor){
                     if($supervisor->lecturer_id == $value){
                         $status[$value]++;
                     }
                 }
+
                 if($status[$value] >= 20){
                     $lecturer = Lecturer::findOrFail($value);
                     toastr()->warning("Pembimbing ".$lecturer->name." sudah penuh");
@@ -66,13 +79,14 @@ class ThesisController extends Controller
                 }
             }
 
+            $start_at = date('Y-m-d', strtotime($request->start_at));
             foreach ($lecturer_field as $key => $value) {
                 if (isset($value)) {
                     if($key == 0){
-                        ThesisSupervisor::create(['thesis_id' => $x->id, 'lecturer_id' => $value, 'position' => 1]);
+                        ThesisSupervisor::create(['thesis_id' => $x->id, 'lecturer_id' => $value, 'position' => 1, 'start_at' => $start_at]);
                     }
                     else {
-                        ThesisSupervisor::create(['thesis_id' => $x->id, 'lecturer_id' => $value, 'position' => 2]);
+                        ThesisSupervisor::create(['thesis_id' => $x->id, 'lecturer_id' => $value, 'position' => 2, 'start_at' => $start_at]);
                     }
                 }
             }
